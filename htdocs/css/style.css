@@ -1,0 +1,32 @@
+/**
+ * General setup for layout.
+ */
+html {
+    overflow-y: scroll;
+}
+
+/* Header */
+.navbar .navbar-brand {
+    color: #ff9926;
+}
+
+.header {
+    padding-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+    padding-top: 1.5rem;
+    color: #777;
+    border-top: 0.05rem solid #e5e5e5;
+}
+
+/* Media queries */
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 48em) {
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 2rem;
+    }
+}
