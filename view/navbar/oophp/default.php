@@ -23,6 +23,10 @@ $navbar = [
             "title" => "Om",
             "route" => "om",
         ],
+        "guess" => [
+            "title" => "Gissa",
+            "route" => "gissa",
+        ],
         "playground" => [
             "title" => "Lek",
             "route" => "lek",

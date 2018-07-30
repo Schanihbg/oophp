@@ -5,3 +5,4 @@ memory::
 composer.lock
 database.php
 .DS_Store
+/doc
