@@ -31,7 +31,35 @@ Hade faktiskt ingen TIL i detta kmom, tyvärr. Då jag redan kunde det mesta som
 Kmom02
 -------------------------
 
-Här är redovisningstexten
+**Hur gick det att överföra spelet “Gissa mitt nummer” in i din me-sida?**
+
+Det var inte så svårt efter att jag kollade på videon, den var till en stor hjälp eftersom artikeln inte svarade riktigt hur man skulle göra vissa saker. Lite hur vyerna och det fungerade, men det klarnade upp när jag kollade igenom videorna.
+
+**Berätta om hur du löste uppgiften med Tärningsspelet 100, hur du tänkte, planerade och utförde uppgiften samt hur du organiserade din kod?**
+
+Tyvärr så hade jag inte riktigt en plan. Såhär i efterhand hade nog varit bra med en liten strukturerad plan faktiskt, man är alltid efterklok!
+
+Nu löste jag så att datorn bara spelar en runda och sparar sina poäng.
+Jag fixade spelet genom att använda en blandning utav `session` och `post`.
+
+**Berätta om din syn på modellering likt UML jämfört med verktyg som phpDocumentor.**
+UML kan man göra i förväg för att få en överblick på vad man behöver för funktioner och klasser. När det gäller phpDocumentor så genereras dokumentationen efter man har skrivit all sin kod.
+
+**Fördelar, nackdelar, användningsområde? Vad tycker du om konceptet make doc?**
+
+Fördelen med auto-genererad dokumentation är att ”bara” behöver skriva det en gång, i filen du jobbar med. Sen kan alla beskåda dokumentationen via en auto-genererad sida. Nackdelen är att många ofta inte orkar skriva en docblock så det kan genereras efteråt.
+
+**Hur känns det att skriva kod utanför och inuti ramverket, ser du fördelar och nackdelar med de olika sätten?**
+
+Det är ibland enklare att skriva inuti ramverket, för då har man lite fler magiska funktioner som man kan använda. En av favoriterna är `$this->di->get(”url”)->create()`, vilket skapar en url länk relativt till vart du är, så man inte behöver tänka på att hoppa fram och tillbaka i mapparna när man ska skapa en länk.
+
+
+**Vilken är din TIL för detta kmom?**
+
+Märkte att Anax/Url inte läser in vilket protokoll som används, så går man in på en sida med https, så är länkarna skapade i vanliga http. Så det blir en massa ”mixed-content” errors. Det kan vara sönder på studentservern också, vet inte riktigt.
+
+Har lärt mig att jag är dålig på att göra spel, spelar hellre de istället!
+
 
 
 
