@@ -66,7 +66,27 @@ Har lärt mig att jag är dålig på att göra spel, spelar hellre de istället!
 Kmom03
 -------------------------
 
-Här är redovisningstexten
+**Har du tidigare erfarenheter av att skriva kod som testar annan kod?**
+
+Har gjort det tidigare i ramverk1, där man testar sin kod från en kommentarsmodul man har skapat själv. Där var det lite mer komplexa fall att utföra, men det gick till slut. Utöver det har jag nog inte hanterat enhetstester så mycket innan.
+
+**Hur ser du på begreppen enhetstestning och att skriva testbar kod?**
+
+Det är mycket fint att ha. För då slipper man testa själv om och om igen ifall man har ändrat en funktion. För man vet aldrig riktigt vad som kan gå sönder när man introducerar ny kod till systemet.
+
+**Förklara kort begreppen white/grey/black box testing samt positiva och negativa tester, med dina egna ord.**
+
+Whitebox är när man testar interna funktioner, så man kan se att allting i bakgrunden flyter på korrekt. Blackbox är när man testar utan att riktigt veta vad koden inom en funktion gör med en output, oftast testar man ett krav man har fått. Greybox är en blandning mellan white och black, syftet är att hitta defekter innan man släpper det till produktion till exempel.
+Det positiva är att man hittar buggar och andra saker innan man släpper det skarpt. Det negativa är väl att det tar extra tid att skriva alla testerna.
+
+**Hur gick det att genomföra uppgifterna med enhetstester, använde du egna klasser som bas för din testning?**
+
+Det gick bra att testa, var inte så svåra fall att testa. Använde bara exempelkoden som fanns att testa mot. Mina egna klasser var snarlika skrivna, kändes inte så lönt att testa de då.
+
+**Vilken är din TIL för detta kmom?**
+
+Tydligen kan man testa exceptions, men när man tänker efter så är det rätt självklart. Jag har bara inte gjort det innan.
+
 
 
 
