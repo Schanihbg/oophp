@@ -27,6 +27,10 @@ $navbar = [
             "title" => "Gissa",
             "route" => "gissa",
         ],
+        "dice" => [
+            "title" => "Tärning",
+            "route" => "dice",
+        ],
         "playground" => [
             "title" => "Lek",
             "route" => "lek",

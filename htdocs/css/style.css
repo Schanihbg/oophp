@@ -30,3 +30,24 @@ html {
         margin-bottom: 2rem;
     }
 }
+
+/* Dice */
+
+/**
+ * Style a dice using UTF-8 characters.
+ */
+.dice {
+    font-size: 4rem;
+}
+
+.dice .dice-1::after { content: "\2680"; }
+.dice .dice-2::after { content: "\2681"; }
+.dice .dice-3::after { content: "\2682"; }
+.dice .dice-4::after { content: "\2683"; }
+.dice .dice-5::after { content: "\2684"; }
+.dice .dice-6::after { content: "\2685"; }
+
+i[class^="dice-"],
+i[class*=" dice-"] {
+    font-style: normal;
+}
