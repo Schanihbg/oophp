@@ -52,6 +52,16 @@ class DiceHand
     }
 
     /**
+     * Set values of dices from last roll.
+     *
+     * @return array with values of the last roll.
+     */
+    public function setValues(array $values): void
+    {
+        $this->values = $values;
+    }
+
+    /**
      * Get the sum of all dices.
      *
      * @return int as the sum of all dices.
@@ -96,9 +106,13 @@ class DiceHand
      *
      * @return DiceHand as the dicehand object.
      */
-    public function computerPlayRound(int $score): DiceHand
+    public function computerPlayRound(int $score, string $test = "noTest", array $testArray = array()): DiceHand
     {
         $this->roll();
+
+        if ($test == "test") {
+            $this->setValues($testArray);
+        }
 
         if (!in_array(1, $this->values())) {
             $this->setScore($this->sum() + $score);

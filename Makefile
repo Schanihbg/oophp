@@ -293,7 +293,7 @@ phpunit: prepare
 .PHONY: phpcs
 phpcs: prepare
 	@$(call HELPTEXT,$@)
-	[ ! -f .phpcs.xml ] || $(PHPCS) --standard=.phpcs.xml | tee build/phpcs
+	[ ! -f .phpcs.xml ] || $(PHPCS) --ignore=*/build/* --standard=.phpcs.xml | tee build/phpcs
 
 
 
@@ -313,7 +313,7 @@ endif
 .PHONY: phpmd
 phpmd: prepare
 	@$(call HELPTEXT,$@)
-	- [ ! -f .phpmd.xml ] || $(PHPMD) . text .phpmd.xml | tee build/phpmd
+	- [ ! -f .phpmd.xml ] || $(PHPMD) . text .phpmd.xml --exclude */build/* | tee build/phpmd
 
 
 
