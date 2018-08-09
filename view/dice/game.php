@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST["gameStatus"]) && $_POST["gameStatus"] == "game") {
+if ($this->di->get("request")->getPost("gameStatus") == "game") {
     $session->set("player", $player);
     $session->set("computer", $computer);
 } elseif ($session->get("gameStatus") == "game") {
@@ -10,9 +10,9 @@ if (isset($_POST["gameStatus"]) && $_POST["gameStatus"] == "game") {
 }
 
 // Save player score
-if ($session->get("gameStatus") == "game" && isset($_POST["playerAction"])) {
-    if (isset($_POST["playerAction"]) && $_POST["playerAction"] == "save") {
-        $player->setScore($player->getScore() + $_POST["playerRoundScore"]);
+if ($session->get("gameStatus") == "game") {
+    if ($this->di->get("request")->getPost("playerAction") == "save") {
+        $player->setScore($player->getScore() + $this->di->get("request")->getPost("playerRoundScore"));
         $session->set("playTurn", "computer");
         $this->di->get("response")->redirect($this->di->get("url")->create("dice"));
     }
@@ -23,7 +23,7 @@ if ($session->get("gameStatus") == "game" && ($player->getScore() >= 100 || $com
     $session->set("gameStatus", "end");
 }
 
-if ($session->get("gameStatus") == "game" && isset($_POST["changeTurn"]) && $_POST["changeTurn"] == "change") {
+if ($session->get("gameStatus") == "game" && $this->di->get("request")->getPost("changeTurn") == "change") {
     if ($session->get("playTurn") == "player") {
         $session->set("playTurn", "computer");
     } elseif ($session->get("playTurn") == "computer") {
@@ -33,11 +33,11 @@ if ($session->get("gameStatus") == "game" && isset($_POST["changeTurn"]) && $_PO
     $this->di->get("response")->redirect($this->di->get("url")->create("dice"));
 }
 
-if (isset($_POST["gameStatus"]) && $_POST["gameStatus"] == "pre") {
-    $session->set("gameStatus", $_POST["gameStatus"]);
-} elseif (isset($_POST["gameStatus"]) && $_POST["gameStatus"] == "game" && isset($_POST["playTurn"])) {
-    $session->set("gameStatus", $_POST["gameStatus"]);
-    $session->set("playTurn", $_POST["playTurn"]);
+if ($this->di->get("request")->getPost("gameStatus") == "pre") {
+    $session->set("gameStatus", $this->di->get("request")->getPost("gameStatus"));
+} elseif ($this->di->get("request")->getPost("gameStatus") == "game" && $this->di->get("request")->getPost("playTurn")) {
+    $session->set("gameStatus", $this->di->get("request")->getPost("gameStatus"));
+    $session->set("playTurn", $this->di->get("request")->getPost("playTurn"));
 }
 ?>
 
