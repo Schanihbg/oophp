@@ -21,11 +21,16 @@ $app->router->any(["GET", "POST"], "dice", function () use ($app, $session) {
         $computer = new DiceHand($session->get("numberOfDices"));
     }
 
+    $histogramPlayer = new Histogram();
+    $histogramComputer = new Histogram();
+
     $data = [
         "title" => "Losningen | Tärningsspel 100",
         "session" => $session,
         "player" => $player,
+        "histogramPlayer" => $histogramPlayer,
         "computer" => $computer,
+        "histogramComputer" => $histogramComputer,
     ];
 
     $app->view->add("dice/game", $data);

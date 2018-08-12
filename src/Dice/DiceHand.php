@@ -4,8 +4,10 @@ namespace Schanihbg\Dice;
 /**
  * A dicehand, consisting of dices.
  */
-class DiceHand
+class DiceHand implements HistogramInterface
 {
+    use HistogramTrait;
+
     /**
     * @var Dice $dices   Array consisting of dices.
     * @var int  $values  Array consisting of last roll of the dices.
@@ -14,7 +16,7 @@ class DiceHand
     private $dices = array();
     private $values = array();
     private $score = 0;
-
+    private $allTurns = array();
 
     /**
      * Constructor to initiate the dicehand with a number of dices.
@@ -102,6 +104,16 @@ class DiceHand
     }
 
     /**
+     * Add to allTurns.
+     *
+     * @return int as the score.
+     */
+    public function addAllTurns(array $allTurns): void
+    {
+        $this->allTurns = array_merge($this->allTurns, $allTurns);
+    }
+
+    /**
      * Computer plays one round.
      *
      * @return DiceHand as the dicehand object.
@@ -113,6 +125,8 @@ class DiceHand
         if ($test == "test") {
             $this->setValues($testArray);
         }
+
+        $this->addAllTurns($this->values());
 
         if (!in_array(1, $this->values())) {
             $this->setScore($this->sum() + $score);

@@ -1,10 +1,15 @@
 <?php
+namespace Schanihbg\Dice;
+
 if ($this->di->get("request")->getPost("gameStatus") == "game") {
     $session->set("player", $player);
     $session->set("computer", $computer);
 } elseif ($session->get("gameStatus") == "game") {
     $player = $session->get("player");
     $computer = $session->get("computer");
+
+    $histogramPlayer->injectData($player);
+    $histogramComputer->injectData($computer);
 
     $player->roll();
 }
@@ -13,8 +18,13 @@ if ($this->di->get("request")->getPost("gameStatus") == "game") {
 if ($session->get("gameStatus") == "game") {
     if ($this->di->get("request")->getPost("playerAction") == "save") {
         $player->setScore($player->getScore() + $this->di->get("request")->getPost("playerRoundScore"));
+        $player->addAllTurns(json_decode($this->di->get("request")->getPost("playerTurnDiceValues")));
         $session->set("playTurn", "computer");
         $this->di->get("response")->redirect($this->di->get("url")->create("dice"));
+    }
+
+    if ($this->di->get("request")->getPost("playerAction") == "continue" || $this->di->get("request")->getPost("changeTurn")) {
+        $player->addAllTurns(json_decode($this->di->get("request")->getPost("playerTurnDiceValues")));
     }
 }
 
@@ -94,6 +104,7 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
                 <h4>Du</h4>
 
                 <p>Din poäng: <?= $player->getScore() ?></p>
+                <pre><?= $histogramPlayer->getAsText() ?></pre>
                 <div class="d-flex flex-row">
                     <div>
                         <p class="dice">
@@ -105,8 +116,9 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
                 </div>
                 <?php if ($session->get("playTurn") == "player") : ?>
                     <?php if (in_array(1, $player->values())) : ?>
-                        <p>Du fick en 1, inga poäng sparas.</p>
+                        <p>Du fick en 1:a, inga poäng sparas.</p>
                         <form method="POST">
+                            <input type="hidden" name="playerTurnDiceValues" value="<?= json_encode($player->values()) ?>">
                             <div class="input-group mb-3">
                                 <button name="changeTurn" type="submit" class="btn btn-success" value="change">Låt datorn spela</button>
                             </div>
@@ -115,6 +127,7 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
                         <p>Poäng denna rundan: <?= $player->sum() ?>.</p>
 
                         <form method="POST">
+                            <input type="hidden" name="playerTurnDiceValues" value="<?= json_encode($player->values()) ?>">
                             <input type="hidden" name="playerRoundScore" value="<?= $player->sum() ?>">
 
                             <div class="input-group mb-3">
@@ -138,6 +151,7 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
                 <h4>Dator</h4>
 
                 <p>Dator poäng: <?= $computer->getScore() ?></p>
+                <pre><?= $histogramComputer->getAsText() ?></pre>
             </div>
         </div>
     <?php endif; ?>
