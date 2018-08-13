@@ -111,4 +111,16 @@ class DiceHandTest extends TestCase
         $testArray = array(0 => 1, 1 => 1, 2 => 1, 3 => 1, 4 => 1);
         $this->assertInstanceOf("\Schanihbg\Dice\DiceHand", $dicehand->computerPlayRound(1, "test", $testArray));
     }
+
+    /**
+     * Test computerPlayRound with no 1 in values.
+     */
+    public function testComputerPlayRoundSuccessWithScore()
+    {
+        $dicehand = new DiceHand();
+        $this->assertInstanceOf("\Schanihbg\Dice\DiceHand", $dicehand);
+
+        $testArray = array(0 => 6, 1 => 6, 2 => 6, 3 => 6, 4 => 6);
+        $this->assertInstanceOf("\Schanihbg\Dice\DiceHand", $dicehand->computerPlayRound(50, "test", $testArray));
+    }
 }

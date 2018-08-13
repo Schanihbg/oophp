@@ -120,17 +120,40 @@ class DiceHand implements HistogramInterface
      */
     public function computerPlayRound(int $score, string $test = "noTest", array $testArray = array()): DiceHand
     {
-        $this->roll();
+        $roundScore = 0;
+        $roundDices = array();
 
-        if ($test == "test") {
-            $this->setValues($testArray);
+        if ($score < 50) {
+            $timesToRun = 3;
+        } elseif ($score >= 50) {
+            $timesToRun = 1;
         }
 
-        $this->addAllTurns($this->values());
+        $index = 0;
+        $runner = true;
 
-        if (!in_array(1, $this->values())) {
-            $this->setScore($this->sum() + $score);
+        while ($runner) {
+            $index++;
+
+            $this->roll();
+
+            if ($test == "test") {
+                $this->setValues($testArray);
+            }
+
+            $roundDices = array_merge($roundDices, $this->values());
+
+            if (!in_array(1, $this->values())) {
+                $roundScore = $roundScore + $this->sum();
+            }
+
+            if (in_array(1, $this->values()) || $index == $timesToRun) {
+                $runner = false;
+            }
         }
+
+        $this->setScore($score + $roundScore);
+        $this->addAllTurns($roundDices);
 
         return $this;
     }

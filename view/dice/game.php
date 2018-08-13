@@ -143,7 +143,7 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
                             </div>
                         </form>
                     <?php else : ?>
-                        <p>Poäng denna rundan (sparade poäng):<br> <b><?= $player->sum() ?> (<?= $session->get("turnScore") ?>)</b>.</p>
+                        <p>Poäng denna rundan (sparade poäng): <b><?= $player->sum() ?> (<?= $session->get("turnScore") ?>)</b>.</p>
 
                         <form method="POST">
                             <input type="hidden" name="playerTurnDiceValues" value="<?= json_encode($player->values()) ?>">
