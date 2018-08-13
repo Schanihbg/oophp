@@ -17,14 +17,29 @@ if ($this->di->get("request")->getPost("gameStatus") == "game") {
 // Save player score
 if ($session->get("gameStatus") == "game") {
     if ($this->di->get("request")->getPost("playerAction") == "save") {
-        $player->setScore($player->getScore() + $this->di->get("request")->getPost("playerRoundScore"));
-        $player->addAllTurns(json_decode($this->di->get("request")->getPost("playerTurnDiceValues")));
+        $player->setScore($player->getScore() + $this->di->get("request")->getPost("playerRoundScore") + $session->get("turnScore"));
+        if ($session->get("turnDices") != null) {
+            $dicesToAdd = array_merge(json_decode($this->di->get("request")->getPost("playerTurnDiceValues")), $session->get("turnDices"));
+        } else {
+            $dicesToAdd = json_decode($this->di->get("request")->getPost("playerTurnDiceValues"));
+        }
+
+        $player->addAllTurns($dicesToAdd);
         $session->set("playTurn", "computer");
+        $session->set("turnScore", 0);
+        $session->set("turnDices", null);
         $this->di->get("response")->redirect($this->di->get("url")->create("dice"));
     }
 
-    if ($this->di->get("request")->getPost("playerAction") == "continue" || $this->di->get("request")->getPost("changeTurn")) {
+    if ($this->di->get("request")->getPost("playerAction") == "continue") {
+        $session->set("turnScore", $session->get("turnScore") + $this->di->get("request")->getPost("playerRoundScore"));
+        $session->set("turnDices", json_decode($this->di->get("request")->getPost("playerTurnDiceValues")));
+    }
+
+    if ($this->di->get("request")->getPost("changeTurn")) {
         $player->addAllTurns(json_decode($this->di->get("request")->getPost("playerTurnDiceValues")));
+        $session->set("turnScore", 0);
+        $session->set("turnDices", null);
     }
 }
 
@@ -36,6 +51,8 @@ if ($session->get("gameStatus") == "game" && ($player->getScore() >= 100 || $com
 if ($session->get("gameStatus") == "game" && $this->di->get("request")->getPost("changeTurn") == "change") {
     if ($session->get("playTurn") == "player") {
         $session->set("playTurn", "computer");
+        $session->set("turnScore", 0);
+        $session->set("turnDices", null);
     } elseif ($session->get("playTurn") == "computer") {
         $session->set("playTurn", "player");
     }
@@ -45,6 +62,8 @@ if ($session->get("gameStatus") == "game" && $this->di->get("request")->getPost(
 
 if ($this->di->get("request")->getPost("gameStatus") == "pre") {
     $session->set("gameStatus", $this->di->get("request")->getPost("gameStatus"));
+    $session->set("turnScore", 0);
+    $session->set("turnDices", null);
 } elseif ($this->di->get("request")->getPost("gameStatus") == "game" && $this->di->get("request")->getPost("playTurn")) {
     $session->set("gameStatus", $this->di->get("request")->getPost("gameStatus"));
     $session->set("playTurn", $this->di->get("request")->getPost("playTurn"));
@@ -103,7 +122,7 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
             <div class="flex-fill">
                 <h4>Du</h4>
 
-                <p>Din poäng: <?= $player->getScore() ?></p>
+                <p>Din poäng: <b><?= $player->getScore() ?></b></p>
                 <pre><?= $histogramPlayer->getAsText() ?></pre>
                 <div class="d-flex flex-row">
                     <div>
@@ -124,7 +143,7 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
                             </div>
                         </form>
                     <?php else : ?>
-                        <p>Poäng denna rundan: <?= $player->sum() ?>.</p>
+                        <p>Poäng denna rundan (sparade poäng):<br> <b><?= $player->sum() ?> (<?= $session->get("turnScore") ?>)</b>.</p>
 
                         <form method="POST">
                             <input type="hidden" name="playerTurnDiceValues" value="<?= json_encode($player->values()) ?>">
