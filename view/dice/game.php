@@ -160,12 +160,15 @@ if ($this->di->get("request")->getPost("gameStatus") == "pre") {
     <?php if ($session->get("gameStatus") == "end") : ?>
         <?php
         $winner = "Dator";
-        if ($player->getScore() > $computer->getScore()) {
+        if ($session->get("player")->getScore() > $session->get("computer")->getScore()) {
             $winner = "Du";
         }
         ?>
         <p>Spelet är över!</p>
-        <p>Vinnaren är: <?= $winner ?>!</p>
+        <p>Vinnaren är: <b><?= $winner ?>!</b></p>
+        <p>Poängställning</p>
+        <p>Du: <?= $session->get("player")->getScore() ?></p>
+        <p>Dator: <?= $session->get("computer")->getScore() ?></p>
     <?php endif; ?>
 
     <hr>
