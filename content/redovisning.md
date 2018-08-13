@@ -93,7 +93,25 @@ Tydligen kan man testa exceptions, men när man tänker efter så är det rätt 
 Kmom04
 -------------------------
 
-Här är redovisningstexten
+**Vilka är dina tankar och funderingar kring trait och interface?**
+
+Jag förstår fortfarande inte riktigt vad trait och interface ska vara bra för. Den ärver men ärver ändå inte, man bara baserar det på en annan klass? Jag tror att lite fler exempel hur det fungerar skulle nog varit bra.
+
+**Hur gick det att skapa intelligensen och taktiken till tärningsspelet, hur gjorde du?**
+
+Jag gjorde en väldigt avancerad intelligens till min dator. Det hela går ut på att, om datorn har under 50 poäng så ska den försöka kasta tärningarna tre gånger. Om det är över 50 poäng så försöker den bara kasta en gång. Tänkte i tankarna att i början kan man spela lite mer aggressivt för att sedan trappa ner och köra på den säkra sidan.
+
+**Några reflektioner från att integrera hårdare in i ramverkets klasser och struktur?**
+
+Tycker det är smidigt att använda ramverkets funktioner, dock blir ju kodraderna lite längre för att man behöver kalla på olika saker för att nå fram. Fördelen är nog att man har inbyggd felhantering, givet att de som skapade ramverket har lagt in det.
+
+**Berätta hur väl du lyckades med make test inuti ramverket och hur väl du lyckades att testa din kod med enhetstester och vilken kodtäckning du fick.**
+
+Det gick bra att få in enhetstestning i ramverket. Efter har skrivit lite diverse tester, så gick det smidigt att göra dessa. Testade dock bara mot det jag har skrivit själv, så jag exkluderade Page och routemodulerna. Jag lyckades nå 100% kodtäckning, fick dock skriva en liten specialare för min funktion som låter datorn spela tärningsspelet.
+
+**Vilken är din TIL för detta kmom?**
+
+Vill man göra sin kod mer testbar, så kan man dela upp saker i mindre funktioner som är enklare att testa. Som tur så blev mina funktioner inte så gigantiska.
 
 
 
