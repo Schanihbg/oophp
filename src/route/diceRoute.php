@@ -5,14 +5,12 @@
 
 namespace Schanihbg\Dice;
 
-$session = new \Anax\Session\Session();
-$session->name("losningen-dicegame");
-$session->start();
-
 /**
  * Dice Main game.
  */
-$app->router->any(["GET", "POST"], "dice", function () use ($app, $session) {
+$app->router->any(["GET", "POST"], "dice", function () use ($app) {
+    $session = $app->session;
+
     if ($session->get("gameStatus") == "new") {
         $player = new DiceHand(1);
         $computer = new DiceHand(1);
@@ -41,7 +39,9 @@ $app->router->any(["GET", "POST"], "dice", function () use ($app, $session) {
 /**
  * Dice New game.
  */
-$app->router->any(["GET", "POST"], "dice/new", function () use ($app, $session) {
+$app->router->any(["GET", "POST"], "dice/new", function () use ($app) {
+    $session = $app->session;
+
     $data = [
         "title" => "Losningen | Tärningsspel 100",
         "session" => $session,
@@ -55,7 +55,9 @@ $app->router->any(["GET", "POST"], "dice/new", function () use ($app, $session) 
 /**
  * Dice Register game.
  */
-$app->router->post("dice/register", function () use ($app, $session) {
+$app->router->post("dice/register", function () use ($app) {
+    $session = $app->session;
+
     $data = [
         "title" => "Losningen | Tärningsspel 100",
     ];
@@ -69,12 +71,20 @@ $app->router->post("dice/register", function () use ($app, $session) {
 /**
  * Dice Reset game.
  */
-$app->router->get("dice/reset", function () use ($app, $session) {
+$app->router->get("dice/reset", function () use ($app) {
+    $session = $app->session;
+
     $data = [
         "title" => "Losningen | Tärningsspel 100",
     ];
 
-    $session->destroy();
+    $session->delete("player");
+    $session->delete("computer");
+    $session->delete("numberOfDices");
+    $session->delete("gameStatus");
+    $session->delete("turnScore");
+    $session->delete("turnDices");
+    $session->delete("playTurn");
 
     $app->response->redirect($app->url->create("dice/new"));
 });

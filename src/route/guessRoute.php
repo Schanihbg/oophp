@@ -98,12 +98,12 @@ $app->router->any(["GET", "POST"], "gissa/session", function () use ($app) {
     $title = "Losningen | Guess games (SESSION)";
     $answer = "";
 
-    $session = new \Anax\Session\Session();
-    $session->name("losningen-session");
-    $session->start();
+    $session = $app->session;
 
     if (isset($_GET["reset"])) {
-        $session->destroy("index_session.php");
+        $session->delete("savedValue");
+        $session->delete("savedGuesses");
+        $session->delete("guessValue");
     }
 
     if ($session->get("savedValue") !== null && $session->get("savedGuesses") !== null) {
