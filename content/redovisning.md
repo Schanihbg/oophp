@@ -118,7 +118,22 @@ Vill man göra sin kod mer testbar, så kan man dela upp saker i mindre funktion
 Kmom05
 -------------------------
 
-Här är redovisningstexten
+**Några reflektioner kring koden i övningen för PHP PDO och MySQL?**
+
+Jag gjorde tyvärr inte övningen, så jag har inga reflektioner kring den. Jag kände att jag redan kunde PHP PDO och koppling mellan MySQL. Men jag skumläste artikeln lite snabbt för att se om det var något häftigt som visades.
+
+**Hur gick det att överföra koden in i ramverket, stötte du på några utmaningar?**
+
+Var inte så svårt att föra över koden, det var mest lite pill i vyerna för att få det att se ut enligt Bootstraps designprinciper. För logiken var det mest bara att ändra ett par variabler så det fungerade med ramverket istället.
+
+**Berätta om din slutprodukt för filmdatabasen, gjorde du endast basfunktionaliteten eller lade du till extra features och hur tänkte du till kring användarvänligheten och din kodstruktur?**
+
+Jag lade bara till basfunktionerna. Sök, ändra, lägg till och ta bort la jag till som funktioner. För användarvänlighetens skull så valde jag att ha saker som ändra, lägg till och ta bort på samma sida. Filmerna finns i en tabell som gör det enkelt att beskåda
+
+**Vilken är din TIL för detta kmom?**
+
+PHP har en inställning `output_buffering` som döljer vissa felmeddelanden ibland. Om det är bra eller dåligt att dölja vissa sorters av felmeddelanden är en tolkningsfråga. Den döljde vissa session felmeddelanden i mitt fall.
+
 
 
 
