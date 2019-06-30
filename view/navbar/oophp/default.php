@@ -35,6 +35,10 @@ $navbar = [
             "title" => "Filmer",
             "route" => "movie",
         ],
+        "blog" => [
+            "title" => "Blogg",
+            "route" => "blog",
+        ],
         "playground" => [
             "title" => "Lek",
             "route" => "lek",

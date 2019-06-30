@@ -15,7 +15,8 @@
         "anax/view": "^1.0",
         "mos/cimage": "^0.7.20",
         "symfony/yaml": "^3.3",
-        "anax/database": "^1.1"
+        "anax/database": "^1.1",
+        "michelf/php-markdown": "^1.8"
     },
     "autoload": {
         "psr-4": {

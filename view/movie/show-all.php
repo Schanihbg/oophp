@@ -16,7 +16,7 @@ if (!$resultset) {
     </thead>
 <?php $id = 0; foreach ($resultset as $row) :
     $id++;
-?>
+    ?>
     <tr>
         <td><?= $id ?></td>
         <td><img src='<?= $this->di->get("url")->create("image/{$row->image}?w=100") ?>'></td>
